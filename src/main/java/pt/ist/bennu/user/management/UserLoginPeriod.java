@@ -28,6 +28,7 @@ public class UserLoginPeriod extends UserLoginPeriod_Base {
         setUser(Objects.requireNonNull(user));
         super.setBeginDate(Objects.requireNonNull(beginDate, "beginDate cannot be null"));
         super.setEndDate(Objects.requireNonNull(endDate, "endDate cannot be null"));
+        computeUserExpiration(user);
     }
 
     /**
@@ -43,6 +44,7 @@ public class UserLoginPeriod extends UserLoginPeriod_Base {
         }
         super.setBeginDate(beginDate);
         super.setEndDate(endDate);
+        computeUserExpiration(getUser());
     }
 
     /**
@@ -120,6 +122,9 @@ public class UserLoginPeriod extends UserLoginPeriod_Base {
     private UserLoginPeriod(User user) {
         setUser(user);
         super.setBeginDate(new LocalDate());
+
+        // Open periods means the user has no expiration
+        user.setExpiration(null);
     }
 
     @ConsistencyPredicate
@@ -139,4 +144,21 @@ public class UserLoginPeriod extends UserLoginPeriod_Base {
         return null;
     }
 
+    public static void computeUserExpiration(User user) {
+        LocalDate latest = user.getExpiration();
+        for (UserLoginPeriod period : user.getLoginPeriodSet()) {
+            // If there is an open period, set the user's expiration to null (i.e. open)
+            if (period.getEndDate() == null) {
+                latest = null;
+                break;
+            }
+
+            // If no expiration is defined, or the current expiration is before the period's end date,
+            // set it as the expiration.
+            if (latest == null || latest.isBefore(period.getEndDate())) {
+                latest = period.getEndDate();
+            }
+        }
+        user.setExpiration(latest);
+    }
 }
