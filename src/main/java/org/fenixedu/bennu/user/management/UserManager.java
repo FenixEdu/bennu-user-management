@@ -1,4 +1,4 @@
-package pt.ist.bennu.user.management;
+package org.fenixedu.bennu.user.management;
 
 import org.fenixedu.bennu.core.domain.User;
 

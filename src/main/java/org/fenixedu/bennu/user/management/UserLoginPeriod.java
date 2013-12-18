@@ -1,4 +1,4 @@
-package pt.ist.bennu.user.management;
+package org.fenixedu.bennu.user.management;
 
 import java.util.Objects;
 
@@ -70,7 +70,7 @@ public class UserLoginPeriod extends UserLoginPeriod_Base {
     /**
      * Deletes this period. If the period is already started, it throws an exception.
      * 
-     * @see pt.ist.bennu.user.management.UserLoginPeriod#isStarted()
+     * @see org.fenixedu.bennu.user.management.UserLoginPeriod#isStarted()
      */
     public void delete() {
         if (isStarted()) {
@@ -103,7 +103,7 @@ public class UserLoginPeriod extends UserLoginPeriod_Base {
     // Private API
 
     /**
-     * @see pt.ist.bennu.user.management.UserLoginPeriod#edit(LocalDate, LocalDate)
+     * @see org.fenixedu.bennu.user.management.UserLoginPeriod#edit(LocalDate, LocalDate)
      */
     @Override
     public void setBeginDate(LocalDate beginDate) {
@@ -111,7 +111,7 @@ public class UserLoginPeriod extends UserLoginPeriod_Base {
     }
 
     /**
-     * @see pt.ist.bennu.user.management.UserLoginPeriod#edit(LocalDate, LocalDate)
+     * @see org.fenixedu.bennu.user.management.UserLoginPeriod#edit(LocalDate, LocalDate)
      */
     @Override
     public void setEndDate(LocalDate endDate) {
