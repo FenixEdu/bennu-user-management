@@ -4,9 +4,8 @@ import java.util.Objects;
 
 import jvstm.cps.ConsistencyPredicate;
 
+import org.fenixedu.bennu.core.domain.User;
 import org.joda.time.LocalDate;
-
-import pt.ist.bennu.core.domain.User;
 
 /**
  * Represents a period in time in which the associated {@link User} is allowed to log in to the application.

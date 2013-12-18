@@ -1,9 +1,8 @@
 package pt.ist.bennu.user.management;
 
+import org.fenixedu.bennu.core.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import pt.ist.bennu.core.domain.User;
 
 /**
  * Entry point for automatic username generation strategies.

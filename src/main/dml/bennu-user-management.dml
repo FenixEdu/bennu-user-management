@@ -6,7 +6,7 @@ class UserLoginPeriod {
 }
 
 relation UserHasLoginPeriods {
-    .pt.ist.bennu.core.domain.User playsRole user {
+    .org.fenixedu.bennu.core.domain.User playsRole user {
         multiplicity 1..1;
     }
     UserLoginPeriod playsRole loginPeriod {

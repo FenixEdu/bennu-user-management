@@ -2,7 +2,7 @@ package pt.ist.bennu.user.management;
 
 import javax.ws.rs.core.Response.Status;
 
-import pt.ist.bennu.core.domain.exceptions.DomainException;
+import org.fenixedu.bennu.core.domain.exceptions.DomainException;
 
 public class UserManagementDomainException extends DomainException {
 
