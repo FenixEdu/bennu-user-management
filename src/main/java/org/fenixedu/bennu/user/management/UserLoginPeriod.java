@@ -25,9 +25,27 @@ public class UserLoginPeriod extends UserLoginPeriod_Base {
      */
     public UserLoginPeriod(User user, LocalDate beginDate, LocalDate endDate) {
         setUser(Objects.requireNonNull(user));
-        super.setBeginDate(Objects.requireNonNull(beginDate, "beginDate cannot be null"));
-        super.setEndDate(Objects.requireNonNull(endDate, "endDate cannot be null"));
+        setBeginDate(Objects.requireNonNull(beginDate, "beginDate cannot be null"));
+        setEndDate(Objects.requireNonNull(endDate, "endDate cannot be null"));
         computeUserExpiration(user);
+    }
+
+    @Override
+    public User getUser() {
+        // FIXME: remove when the framework supports read-only slots
+        return super.getUser();
+    }
+
+    @Override
+    public LocalDate getBeginDate() {
+        // FIXME: remove when the framework supports read-only slots
+        return super.getBeginDate();
+    }
+
+    @Override
+    public LocalDate getEndDate() {
+        // FIXME: remove when the framework supports read-only slots
+        return super.getEndDate();
     }
 
     /**
@@ -41,8 +59,8 @@ public class UserLoginPeriod extends UserLoginPeriod_Base {
         if (!getBeginDate().equals(beginDate) && isStarted()) {
             throw UserManagementDomainException.cannotEditOpenPeriodStartDate();
         }
-        super.setBeginDate(beginDate);
-        super.setEndDate(endDate);
+        setBeginDate(beginDate);
+        setEndDate(endDate);
         computeUserExpiration(getUser());
     }
 
@@ -74,7 +92,7 @@ public class UserLoginPeriod extends UserLoginPeriod_Base {
      */
     public void delete() {
         if (isStarted()) {
-            throw new UserManagementDomainException("cannot.delete.started.login.period");
+            throw UserManagementDomainException.cannotDeleteStartedLoginPeriod();
         } else {
             setUser(null);
             deleteDomainObject();
@@ -101,22 +119,6 @@ public class UserLoginPeriod extends UserLoginPeriod_Base {
     }
 
     // Private API
-
-    /**
-     * @see org.fenixedu.bennu.user.management.UserLoginPeriod#edit(LocalDate, LocalDate)
-     */
-    @Override
-    public void setBeginDate(LocalDate beginDate) {
-        throw UserManagementDomainException.cannotOverwritePeriodDates();
-    }
-
-    /**
-     * @see org.fenixedu.bennu.user.management.UserLoginPeriod#edit(LocalDate, LocalDate)
-     */
-    @Override
-    public void setEndDate(LocalDate endDate) {
-        throw UserManagementDomainException.cannotOverwritePeriodDates();
-    }
 
     private UserLoginPeriod(User user) {
         setUser(user);

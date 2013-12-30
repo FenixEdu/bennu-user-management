@@ -34,8 +34,7 @@ public class UserManagementDomainException extends DomainException {
         return new UserManagementDomainException("cannot.edit.open.period.start.date");
     }
 
-    public static UserManagementDomainException cannotOverwritePeriodDates() {
-        return new UserManagementDomainException("cannot.overwrite.period.dates");
+    public static UserManagementDomainException cannotDeleteStartedLoginPeriod() {
+        return new UserManagementDomainException("cannot.delete.started.login.period");
     }
-
 }
