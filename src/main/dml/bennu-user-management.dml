@@ -1,0 +1,15 @@
+package org.fenixedu.bennu.user.management;
+
+public class UserLoginPeriod {
+    protected LocalDate beginDate (REQUIRED);
+    protected LocalDate endDate;
+}
+
+relation UserHasLoginPeriods {
+    protected .org.fenixedu.bennu.core.domain.User playsRole user {
+        multiplicity 1..1;
+    }
+    public UserLoginPeriod playsRole loginPeriod {
+        multiplicity *;
+    }
+}
